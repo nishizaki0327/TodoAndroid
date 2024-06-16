@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.myapplication.entity.ToDoItem
 import com.example.myapplication.ui.organisms.AppBar
+import com.example.myapplication.ui.templates.MainLayout
 import java.time.LocalDate
 
 @Composable
@@ -16,11 +17,11 @@ fun ToDoAddPage(navController: NavController, onAddToDoItem: (ToDoItem) -> Unit)
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
     var showDialog by remember { mutableStateOf(false) }
 
-    Scaffold(
-        // TopAppBarを表示する
-        topBar = { AppBar(title = "TODO追加", navController = navController) }
-    ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
+    MainLayout(
+        title = "TODO追加",
+        navController = navController
+    ) {
+        Column {
             //        CalendarView(
             //            startDate = LocalDate.now().minusMonths(1),
             //            endDate = LocalDate.now().plusMonths(1),

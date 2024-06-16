@@ -11,24 +11,5 @@ import java.time.LocalDate
 
 @Composable
 fun ToDoApp() {
-    val navController = rememberNavController()
-    val interactor = remember { ToDoInteractor() }
-//    val presenter = remember { ToDoPresenter(ToDoViewImpl(navController), interactor) }
-    val router = remember { ToDoRouter() }
-
-    NavHost(navController, startDestination = "todoList") {
-        composable("todoList") {
-            ToDoListScreen(
-                toDoItems = interactor.getToDoItems().filter { it.date == LocalDate.now() },
-                navController = navController,
-                onAddClick = { router.navigateToAddScreen(navController) }
-            )
-        }
-        composable("addToDo") {
-            ToDoAddPage(navController = navController) { newItem ->
-                interactor.addToDoItem(newItem)
-                navController.navigateUp()
-            }
-        }
-    }
+    ToDoRouter().createNavHost()
 }

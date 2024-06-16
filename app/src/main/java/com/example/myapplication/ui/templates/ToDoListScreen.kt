@@ -11,16 +11,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.myapplication.ui.organisms.AppBar
+import com.example.myapplication.ui.templates.MainLayout
 import java.time.LocalDate
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ToDoListScreen(toDoItems: List<ToDoItem>, navController: NavController, onAddClick: () -> Unit) {
-    Scaffold(
-        // TopAppBarを表示する
-        topBar = { AppBar(title = "TODO管理", navController = navController) }
-    ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
+    MainLayout(
+        title = "TODO管理",
+        navController = navController
+    ) {
+        Column {
             Text(text = "${LocalDate.now()}のTODO", fontSize = 18.sp, fontWeight = FontWeight.Bold)
             if (toDoItems.isNotEmpty()) {
                 ToDoCarouselView(toDoItems = toDoItems)
