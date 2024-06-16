@@ -20,14 +20,15 @@ fun ToDoApp() {
         composable("todoList") {
             ToDoListScreen(
                 toDoItems = interactor.getToDoItems().filter { it.date == LocalDate.now() },
+                navController = navController,
                 onAddClick = { router.navigateToAddScreen(navController) }
             )
         }
-//        composable("addToDo") {
-//            ToDoAddPage { newItem ->
-//                interactor.addToDoItem(newItem)
-//                navController.navigateUp()
-//            }
-//        }
+        composable("addToDo") {
+            ToDoAddPage(navController = navController) { newItem ->
+                interactor.addToDoItem(newItem)
+                navController.navigateUp()
+            }
+        }
     }
 }
